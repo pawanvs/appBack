@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"      # Use the port from .env
+    env_file:
+      - .env
+    environment:
+      - AUTH_ENABLED=${AUTH_ENABLED}
+      - API_KEY=${API_KEY}
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - ./ssl:/app/ssl
+    working_dir: /app
+    command: npm run dev
